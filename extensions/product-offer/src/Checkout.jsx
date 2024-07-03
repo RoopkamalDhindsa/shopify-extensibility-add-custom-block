@@ -44,21 +44,6 @@ function App() {
     }
   }, [showError]);
 
-  // [START product-offer-pre-purchase.add-to-cart]
-    async function handleAddToCart(variantId) {
-      setAdding(true);
-      const result = await applyCartLinesChange({
-        type: 'addCartLine',
-        merchandiseId: variantId,
-        quantity: 1,
-      });
-      setAdding(false);
-      if (result.type === 'error') {
-        setShowError(true);
-        console.error(result.message);
-      }
-    }
-    // [END product-offer-pre-purchase.add-to-cart]
 
   // [START product-offer-pre-purchase.retrieve-products]
   async function fetchProducts() {
@@ -103,24 +88,73 @@ function App() {
     return <LoadingSkeleton />;
   }
 
-  if (!loading && products.length === 0) {
-    return null;
-  }
-
   const productsOnOffer = getProductsOnOffer(lines, products);
 
   if (!productsOnOffer.length) {
     return null;
   }
 
+  const orangeStyle = {
+    color: 'orange',
+  };
+
   return (
-    <ProductOffer
-      product={productsOnOffer[0]}
-      i18n={i18n}
-      adding={adding}
-      handleAddToCart={handleAddToCart}
-      showError={showError}
-    />
+    <BlockStack spacing='loose' id="main_rendered_custom_block">
+      <Divider />
+      <Heading level={1} style={orangeStyle}>WHY OVER 200,000 PEOPLE ENJOY NOONBREW</Heading>
+      <BlockStack spacing='loose'>
+        <InlineLayout
+          spacing='base'
+          columns={[64, 'fill', 'auto']}
+          blockAlignment='center'
+        >
+          <Image source="https://cdn.shopify.com/s/files/1/0611/0281/7334/files/gift_card.png?v=1716562235" />
+          <BlockStack spacing='none'>
+            <Heading level={2}>60 Day 100% Money Back Guarantee</Heading>
+            <Text size="small">Not happy with your purchase Just email hi@noonbrew.co and we'll take care of you.</Text>
+          </BlockStack>
+        </InlineLayout>
+      </BlockStack>
+      <BlockStack spacing='loose'>
+        <InlineLayout
+          spacing='base'
+          columns={[64, 'fill', 'auto']}
+          blockAlignment='center'
+        >
+          <Image source="https://cdn.shopify.com/s/files/1/0611/0281/7334/files/gift_card.png?v=1716562235" />
+          <BlockStack spacing='none'>
+            <Heading level={2}>60 Day 100% Money Back Guarantee</Heading>
+            <Text size="small">Not happy with your purchase Just email hi@noonbrew.co and we'll take care of you.</Text>
+          </BlockStack>
+        </InlineLayout>
+      </BlockStack>
+      <BlockStack spacing='loose'>
+        <InlineLayout
+          spacing='base'
+          columns={[64, 'fill', 'auto']}
+          blockAlignment='center'
+        >
+          <Image source="https://cdn.shopify.com/s/files/1/0611/0281/7334/files/gift_card.png?v=1716562235" />
+          <BlockStack spacing='none'>
+            <Heading level={2}>60 Day 100% Money Back Guarantee</Heading>
+            <Text size="small">Not happy with your purchase Just email hi@noonbrew.co and we'll take care of you.</Text>
+          </BlockStack>
+        </InlineLayout>
+      </BlockStack>
+      <BlockStack spacing='loose'>
+        <InlineLayout
+          spacing='base'
+          columns={[64, 'fill', 'auto']}
+          blockAlignment='center'
+        >
+          <Image source="https://cdn.shopify.com/s/files/1/0611/0281/7334/files/gift_card.png?v=1716562235" />
+          <BlockStack spacing='none'>
+            <Heading level={2}>60 Day 100% Money Back Guarantee</Heading>
+            <Text size="small">Not happy with your purchase Just email hi@noonbrew.co and we'll take care of you.</Text>
+          </BlockStack>
+        </InlineLayout>
+      </BlockStack>
+    </BlockStack>
   );
 }
 
@@ -195,12 +229,7 @@ function ProductOffer({ product, i18n, adding, handleAddToCart, showError }) {
             </Text>
             <Text appearance='subdued'>{renderPrice}</Text>
           </BlockStack>
-          <Button
-            kind='secondary'
-            loading={adding}
-            accessibilityLabel={`Add ${title} to cart`}
-            onPress={() => handleAddToCart(variants.nodes[0].id)}
-          >
+          <Button>
             Add
           </Button>
         </InlineLayout>
